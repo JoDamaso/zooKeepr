@@ -1,5 +1,7 @@
 // requiring express.js then storing it in 'app'
 const express = require('express');
+//enviorment variable
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 // destructure'd the animals.json and grabbing the animals object only
@@ -52,7 +54,7 @@ app.get('/api/animals', (req, res) => {
     res.json(results);
 });
 
-// port 3001
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
+// PORT
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}`);
 });
