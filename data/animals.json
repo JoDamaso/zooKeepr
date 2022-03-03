@@ -126,6 +126,26 @@
         "hungry"
       ],
       "id": "12"
+    },
+    {
+      "name": "Anna",
+      "species": "Monkey",
+      "diet": "carnivore",
+      "personalityTraits": [
+        "hungry",
+        "loving"
+      ],
+      "id": "13"
+    },
+    {
+      "name": "Anna",
+      "species": "Monkey",
+      "diet": "carnivore",
+      "personalityTraits": [
+        "hungry",
+        "loving"
+      ],
+      "id": "14"
     }
   ]
 }

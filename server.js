@@ -1,15 +1,20 @@
 // requiring express.js then storing it in 'app'
-const { create } = require('domain');
+// const { create } = require('domain');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+
 //enviorment variable
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
+// uses middleware .static to allow easier access for js and css files that are for the public
+app.use(express.static('public'));
 // parse incoming JSON data
 app.use(express.json());
+
 
 // destructure'd the animals.json and grabbing the animals object only
 const { animals } = require('./data/animals.json');
@@ -102,6 +107,23 @@ app.get('/api/animals/:id', (req, res) => {
         res.sendStatus(404);
     }
 });
+// '/' brings us the root of the server connecting index.html 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+// /animals joins the server and the animals.html
+app.get('/animals', (req, res) =>{
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+// /zookeepers joins the server and the zookeepers.html
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+// '*' is a wildcard route, and endpoint that will default to homepage - '*' always comes last in GET routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 
 // users send data from client side of application to server
 app.post('/api/animals', (req, res) => {
@@ -118,7 +140,9 @@ app.post('/api/animals', (req, res) => {
     }
 });
 
+
 // PORT
+// .listen should ALWAYS BE LAST
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
-});
+}); 
